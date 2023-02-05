@@ -32,6 +32,16 @@ RUN git clone https://github.com/COVESA/vsomeip.git &&\
         cmake --build . --target examples ;\
         ldconfig  
 #RUN pip install rpi.gpio 
+
+RUN cd /home/work/vsomeip/examples
+RUN git clone https://github.com/satyamss7/SOA_CODE_FOR_DOCKER.git
+RUN cd /home/work/vsomeip/build/
+RUN cmake ..
+RUN make
+RUN make install
+RUN cmake --build . --target examples
+RUN ldconfig
+
 COPY ./start.sh /start.sh
 RUN chmod +x /start.sh
 
