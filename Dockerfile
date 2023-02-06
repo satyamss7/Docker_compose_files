@@ -35,6 +35,12 @@ RUN git clone https://github.com/COVESA/vsomeip.git &&\
 
 RUN cd /home/work/vsomeip/examples
 RUN git clone https://github.com/satyamss7/SOA_CODE_FOR_DOCKER.git
+RUN cp -f /home/work/vsomeip/examples/SOA_CODE_FOR_DOCKER/CMakeLists.txt /home/work/vsomeip/examples/
+RUN cp -f /home/work/vsomeip/examples/SOA_CODE_FOR_DOCKER/notify-sample.cpp /home/work/vsomeip/examples/
+RUN cp -f /home/work/vsomeip/examples/SOA_CODE_FOR_DOCKER/subscribe-sample.cpp /home/work/vsomeip/examples/
+RUN cp -f /home/work/vsomeip/examples/SOA_CODE_FOR_DOCKER/serialprt.hpp /home/work/vsomeip/examples/
+RUN cp -f /home/work/vsomeip/examples/SOA_CODE_FOR_DOCKER/serial.cpp /home/work/vsomeip/examples/
+RUN cp -f /home/work/vsomeip/examples/SOA_CODE_FOR_DOCKER/serialprt.hpp /home/work/vsomeip/examples/
 RUN cd /home/work/vsomeip/build/
 RUN cmake ..
 RUN make
