@@ -33,20 +33,22 @@ RUN git clone https://github.com/COVESA/vsomeip.git &&\
         ldconfig  
 #RUN pip install rpi.gpio 
 
-RUN cd /home/work/vsomeip/examples
+RUN cd /home/work/vsomeip/examples &&\
+	git clone https://github.com/gbmhunter/CppLinuxSerial &&\
+	cd CppLinuxSerial &&\
+	mkdir build &&\
+	cd build &&\
+	cmake .. ;\
+	make ;\
+	make install
 RUN git clone https://github.com/satyamss7/SOA_CODE_FOR_DOCKER.git
-RUN cp -f /home/work/vsomeip/examples/SOA_CODE_FOR_DOCKER/CMakeLists.txt /home/work/vsomeip/examples/
-RUN cp -f /home/work/vsomeip/examples/SOA_CODE_FOR_DOCKER/notify-sample.cpp /home/work/vsomeip/examples/
-RUN cp -f /home/work/vsomeip/examples/SOA_CODE_FOR_DOCKER/subscribe-sample.cpp /home/work/vsomeip/examples/
-RUN cp -f /home/work/vsomeip/examples/SOA_CODE_FOR_DOCKER/serialprt.hpp /home/work/vsomeip/examples/
-RUN cp -f /home/work/vsomeip/examples/SOA_CODE_FOR_DOCKER/serial.cpp /home/work/vsomeip/examples/
-RUN cp -f /home/work/vsomeip/examples/SOA_CODE_FOR_DOCKER/serialprt.hpp /home/work/vsomeip/examples/
-RUN cd /home/work/vsomeip/build/
-RUN cmake ..
-RUN make
-RUN make install
-RUN cmake --build . --target examples
-RUN ldconfig
+RUN cp -fr /home/work/SOA_CODE_FOR_DOCKER/* /home/work/vsomeip/examples/
+RUN cd /home/work/vsomeip/build/ &&\
+	cmake .. ;\
+	make ;\
+	make install ;\
+	cmake --build . --target examples ;\
+	ldconfig
 
 COPY ./start.sh /start.sh
 RUN chmod +x /start.sh
@@ -55,4 +57,3 @@ CMD ["/start.sh"]
         
        
         
-
